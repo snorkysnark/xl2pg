@@ -1,0 +1,11 @@
+{
+  "target_table": "",
+  "sheet": 0,
+  "skip_rows": 1,
+  "mapping": {
+    "field1": 1,
+    "field2": 3,
+    "field3": 5,
+    ...
+  }
+}
