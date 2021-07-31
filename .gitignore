@@ -1,0 +1,4 @@
+*.pyc
+data/
+db-filled.json
+map-filled.json
