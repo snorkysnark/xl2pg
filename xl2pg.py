@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import json
 import openpyxl
+from openpyxl.worksheet._write_only import WriteOnlyWorksheet
 import psycopg2
 from lib import dbconfig
 ##
@@ -71,20 +72,21 @@ with psycopg2.connect(dbname=db.dbname, user=db.user, password=db.password) as c
         print('Loading spreadsheet')
         wb = openpyxl.load_workbook(args.spreadsheet)
         sheet = wb.worksheets[sheet_number]
+        assert not isinstance(sheet, WriteOnlyWorksheet), 'Worksheet is write only'
 
         if args.clear:
             print('Clearing', target_table)
             cursor.execute(f'DELETE FROM {target_table};')
 
 
-        max_row = sheet.max_row #type:ignore
+        max_row = sheet.max_row
         assert max_row, 'Cannot get max_row of spreadsheet'
 
         for row_index in range(skip_rows + 1, max_row + 1):
             output_row = []
 
             for column_index in mappings.values():
-                value = sheet.cell(row_index, column_index).value #type:ignore
+                value = sheet.cell(row_index, column_index).value
                 output_row.append(value)
             print('Inserting row', row_index, 'out of', max_row, end='\r', flush=True)
             cursor.execute(exec_statement, output_row)
