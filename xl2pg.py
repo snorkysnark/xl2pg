@@ -64,7 +64,7 @@ exec_statement = generate_execute_statement(mappings)
 ##
 
 print('Connecting to', db.dbname)
-with psycopg2.connect(dbname=db.dbname, user=db.user, password=db.password) as conn:
+with psycopg2.connect(dbname=db.dbname, user=db.user, password=db.password, host=db.host, port=db.port) as conn:
     with conn.cursor() as cursor:
         print('Preparing insert statement')
         cursor.execute(prep_statement)

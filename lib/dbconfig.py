@@ -5,6 +5,8 @@ class DbConfig(NamedTuple):
     dbname: str
     user: Optional[str]
     password: Optional[str]
+    host: Optional[str]
+    port: Optional[str]
 
 def empty_is_none(value):
     if value != '':
@@ -24,7 +26,9 @@ def load(json_path):
         return DbConfig(
             dbname=dbname,
             user=get_config_property(config, 'user'),
-            password=get_config_property(config, 'password')
+            password=get_config_property(config, 'password'),
+            host=get_config_property(config, 'host'),
+            port=get_config_property(config, 'port')
         )
 
 def prompt():
@@ -34,7 +38,9 @@ def prompt():
 
     user = empty_is_none(input('User: '))
     password = empty_is_none(input('Password: '))
-    return DbConfig(dbname, user, password)
+    host = empty_is_none(input('Host: '))
+    port = empty_is_none(input('Port: '))
+    return DbConfig(dbname, user, password, host, port)
 
 def load_or_prompt(json_path):
     config = None

@@ -1,5 +1,7 @@
 {
   "dbname": "",
   "user": "",
-  "password": ""
+  "password": "",
+  "host": "",
+  "port": ""
 }
