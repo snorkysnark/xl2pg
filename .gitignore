@@ -1,4 +1,7 @@
 *.pyc
+__pypackages__/
+.pdm.toml
+
 data/
 db-filled.json
 map-filled.json
