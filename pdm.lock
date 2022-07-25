@@ -40,6 +40,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "typing-extensions"
+version = "4.3.0"
+requires_python = ">=3.7"
+summary = "Backported and Experimental Type Hints for Python 3.7+"
+
+[[package]]
 name = "tzdata"
 version = "2022.1"
 requires_python = ">=2"
@@ -47,7 +53,7 @@ summary = "Provider of IANA time zone data"
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:9ad752caf2c384cd3ad969e6032a443d1053b3eef46303cec52efbadfb1c667a"
+content_hash = "sha256:ac840da687e890ea16357a2716a083ff7329198932ad1aed9d1fe4b56b84bb7c"
 
 [metadata.files]
 "et-xmlfile 1.1.0" = [
@@ -113,6 +119,10 @@ content_hash = "sha256:9ad752caf2c384cd3ad969e6032a443d1053b3eef46303cec52efbadf
     {url = "https://files.pythonhosted.org/packages/ef/67/7541752705d5057b81d102b92464b3ee775b088433ee1885c012ae28f15d/psycopg_binary-3.0.15-cp39-cp39-musllinux_1_1_ppc64le.whl", hash = "sha256:d405645a9a8716a35b8ca5fbdebf902fa37acabebfd6edf771e48b9511eab13a"},
     {url = "https://files.pythonhosted.org/packages/fb/b4/bc2fa3c4b8260844a07fe2dc52775c5f18010570ff23c9a1ee62635e4668/psycopg_binary-3.0.15-cp310-cp310-musllinux_1_1_ppc64le.whl", hash = "sha256:60a8c1ef5145f8443081f8d38d4dd37ea0742cecef5fceedc2ada5b477a283d5"},
     {url = "https://files.pythonhosted.org/packages/ff/78/5204f4197d68d2694c71727d9da71e33c73772ffe1c6becc1515daf59616/psycopg_binary-3.0.15-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:105f86eacd523b8fee0fa576b7efcff2a38714bc084ae781768244a94c36b815"},
+]
+"typing-extensions 4.3.0" = [
+    {url = "https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz", hash = "sha256:e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6"},
+    {url = "https://files.pythonhosted.org/packages/ed/d6/2afc375a8d55b8be879d6b4986d4f69f01115e795e36827fd3a40166028b/typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
 ]
 "tzdata 2022.1" = [
     {url = "https://files.pythonhosted.org/packages/89/2d/49329ebec33b14dae61ecc8c85abe596341832fa36c4bcd3d99fddda018b/tzdata-2022.1-py2.py3-none-any.whl", hash = "sha256:238e70234214138ed7b4e8a0fab0e5e13872edab3be586ab8198c407620e2ab9"},

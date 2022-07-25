@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import TypedDict
 import textwrap
 import sys
+from typing_extensions import NotRequired
 
 import openpyxl
 import psycopg
@@ -11,11 +12,11 @@ from psycopg.sql import SQL, Identifier, Placeholder
 
 
 class MappingConfig(TypedDict):
-    target_schema: str
+    target_schema: NotRequired[str]
     target_table: str
-    sheet_number: int
+    sheet: int
     skip_rows: int
-    mappings: dict[str, int]
+    mapping: dict[str, int]
 
 
 def printerr(*args, **kwargs):
@@ -28,8 +29,10 @@ def upload(
     map_cfg: MappingConfig,
     clear: bool = False,
 ):
+    column_mapping = map_cfg["mapping"]
     table_path = SQL("{}.{}").format(
-        Identifier(map_cfg["target_schema"], map_cfg["target_table"])
+        Identifier(map_cfg.get("target_schema", "public")),
+        Identifier(map_cfg["target_table"]),
     )
     insert_statement = SQL(
         textwrap.dedent(
@@ -40,14 +43,14 @@ def upload(
         )
     ).format(
         table=table_path,
-        fields=SQL(",\n").join(map(Identifier, map_cfg["mappings"].keys())),
-        values=SQL(", ").join([Placeholder()] * len(map_cfg["mappings"])),
+        fields=SQL(",\n").join(map(Identifier, column_mapping.keys())),
+        values=SQL(", ").join([Placeholder()] * len(column_mapping)),
     )
     printerr("Generated statement:")
     printerr(insert_statement.as_string(conn))
     printerr()
 
-    sheet = wb.worksheets[map_cfg["sheet_number"]]
+    sheet = wb.worksheets[map_cfg["sheet"]]
 
     with conn.cursor() as cursor:
         if clear:
@@ -58,7 +61,7 @@ def upload(
         for row_index in range(map_cfg["skip_rows"] + 1, max_row + 1):
             output_row = []
 
-            for column_index in map_cfg.values():
+            for column_index in column_mapping.values():
                 value = sheet.cell(row_index, column_index).value
                 output_row.append(value)
             printerr(

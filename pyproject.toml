@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "openpyxl>=3.0.10",
     "psycopg[binary]>=3.0.15",
+    "typing-extensions>=4.3.0",
 ]
 requires-python = ">=3.9"
 license = {text = "MIT"}
